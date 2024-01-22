@@ -41,9 +41,9 @@ echo -n "Do you want to dowload images? (y/n): "
 read dowload_images
 
 if [ "$downlaod_images" == "y" ]; then 
-wget -mk -e robots==off "$url"
+wget -mk -e robots=off "$url"
 else
-wget -m -e robots==off "$url"
+wget -m -e robots=off "$url"
 fi
 
 wget -m "$url" 
