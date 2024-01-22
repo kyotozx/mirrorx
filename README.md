@@ -9,4 +9,4 @@
 
 ./mirrorx.sh $url
 
-git clone 
+git clone https://github.com/kyotozx/mirrorx.git
