@@ -1,6 +1,6 @@
 # Mirror X
                                                     
-![image](https://github.com/kyotozx/mirrorx/assets/134347770/2687488e-4aff-4adb-ab41-85d7ad5955a6)
+![image](https://media.discordapp.net/attachments/935619098761650249/1227441103037403227/image.png?ex=66286a9b&is=6615f59b&hm=c5970145ba19ee6aaf0ebe3ca294f6862abca08270b383649a039963f0752f9b&=&format=webp&quality=lossless)
 
 
 **Mirror X is a simple script that can clone a website and return whatever the user wants.**
@@ -11,7 +11,6 @@
 
 ### Usage
 
-Usage: 
 ```
 ``$0 <URL> [options]``
 ```
