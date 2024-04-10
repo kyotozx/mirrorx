@@ -7,24 +7,49 @@
 
 ---
 
-## Usage and installation
+## Usage and Installation
 
 ### Usage
 
-Usage: ``$0 <URL> [options]``
+Usage: 
+```
+``$0 <URL> [options]``
+```
+
+Help
+```
   ``-h, --help | Display this help message.``
+```
+
+File type
+```
   ``-f, --file-types | Specify the file types to download.``
+```
+
+Exclude a fyle type
+```
   ``-e, --exclude-file-type | Specify the file types to exclude from the download.``
+```
+
+Serch string
+```
   ``-s, --search-string | Specify the search string to look for in the files.``
+```
+
+Version
+```
   ``-v, --version | Display the version of the script.``
+```
 
 ### Installation  
 
-Clone this repositore: ``$ git clone https://github.com/kyotozx/mirrorx.git``
+Clone this repositore: 
+```
+``$ git clone https://github.com/kyotozx/mirrorx.git``
   ``$ cd mirrorx``
   ``$ chmod +x mirrorx.sh``
   ``./mirrorx.sh``
-
+```
 ---
 
 **THIS IS A EXPERIMENTAL SCRIPT! DID IT JUST TO PRACTICE! Bugs or whatever are expected.**
