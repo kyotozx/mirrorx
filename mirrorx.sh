@@ -8,6 +8,9 @@
 
 # Requirements: wget. Use <sudo apt install wget>.
 
+# Usage: ./mirrorx -h 
+# SEE THE README.MD!
+
 command_exists() {
     command -v "$1" >/dev/null 2>&1
 }
