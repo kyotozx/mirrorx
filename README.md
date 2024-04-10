@@ -35,6 +35,6 @@ Clone this repositore:
 ```
 ---
 
-**THIS IS A EXPERIMENTAL SCRIPT! DID IT JUST TO PRACTICE! Bugs or whatever are expected.**
+**THIS IS A EXPERIMENTAL SCRIPT! DID IT JUST TO PRACTICE! Bugs or whatever are expected. Maybe I'll update over time.**
 
 ---
