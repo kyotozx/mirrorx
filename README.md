@@ -12,7 +12,7 @@
 ### Usage
 
 ```
-$ ./mirrorx <URL> [options]
+  $ ./mirrorx <URL> [options]
 ```
 
 Options
