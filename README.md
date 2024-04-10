@@ -28,7 +28,7 @@ Options
 
 Clone this repositore: 
 ```
-$ git clone https://github.com/kyotozx/mirrorx.git
+  $ git clone https://github.com/kyotozx/mirrorx.git
   $ cd mirrorx
   $ chmod +x mirrorx.sh
   ./mirrorx.sh
