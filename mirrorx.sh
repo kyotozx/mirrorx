@@ -2,9 +2,9 @@
 
 # Note: THIS IS A EXPERIMENTAL SCRIPT! DID IT JUST TO PRACTICE! Bugs or whatever are expected.
 
-# Creds: https://github.com/kyotozx
-# My socials: https://ayo.so/kyotozx
-# Discord: kyotozx
+# Creds: https://github.com/asyx6
+# My socials: https://ayo.so/asyx
+# Discord: .asyx
 
 # Requirements: wget. Use <sudo apt install wget>.
 
@@ -25,7 +25,7 @@ print_banner() {
 ░ ▒░   ░  ░░▓  ░ ▒▓ ░▒▓░░ ▒▓ ░▒▓░░ ▒░▒░▒░ ░ ▒▓ ░▒▓░   ▒▒ ░ ░▓ ░
 ░  ░      ░ ▒ ░  ░▒ ░ ▒░  ░▒ ░ ▒░  ░ ▒ ▒░   ░▒ ░ ▒░   ░░   ░▒ ░
 ░      ░    ▒ ░  ░░   ░   ░░   ░ ░ ░ ░ ▒    ░░   ░     ░    ░  
-       ░    ░     ░        ░         ░ ░     ░         ░    ░  Mirror X v1.0, made by @kyotozx.
+       ░    ░     ░        ░         ░ ░     ░         ░    ░  Mirror X v1.0, made by @asyx6.
                                                                
 "
     echo "
