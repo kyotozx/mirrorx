@@ -2,9 +2,9 @@
 
 # Note: THIS IS A EXPERIMENTAL SCRIPT! DID IT JUST TO PRACTICE! Bugs or whatever are expected.
 
-# Creds: https://github.com/asyx6
-# My socials: https://ayo.so/asyx
-# Discord: .asyx
+# Creds: https://github.com/kyotozx
+# My socials: https://guns.lol/kyotozx
+# Discord: kyotozx
 
 # Requirements: wget. Use <sudo apt install wget>.
 
@@ -43,7 +43,7 @@ usage() {
 ░ ▒░   ░  ░░▓  ░ ▒▓ ░▒▓░░ ▒▓ ░▒▓░░ ▒░▒░▒░ ░ ▒▓ ░▒▓░   ▒▒ ░ ░▓ ░
 ░  ░      ░ ▒ ░  ░▒ ░ ▒░  ░▒ ░ ▒░  ░ ▒ ▒░   ░▒ ░ ▒░   ░░   ░▒ ░
 ░      ░    ▒ ░  ░░   ░   ░░   ░ ░ ░ ░ ▒    ░░   ░     ░    ░  
-       ░    ░     ░        ░         ░ ░     ░         ░    ░  Mirror X v1.0, made by @asyx6.
+       ░    ░     ░        ░         ░ ░     ░         ░    ░  Mirror X v1.0, made by @kyotozx.
                                                                
 "
     echo "
@@ -57,13 +57,48 @@ Options:"
     echo "  -e, --exclude-file-type | Specify the file types to exclude from the download."
     echo "  -s, --search-string | Specify the search string to look for in the files."
     echo "  -v, --version | Display the version of the script."
+    echo "  -r, --recursive | Download recursively with a specified depth."
+    echo "  -l, --limit-rate | Limit the download rate (e.g., 100k)."
+    echo "  -a, --auth | Provide authentication credentials (user:password)."
 }
 
 version() {
     echo "Mirror X v1.0"
 }
 
+check_requirements() {
+    if ! command_exists wget; then
+        echo "Error: wget is not installed. Please install it using 'sudo apt install wget'."
+        exit 1
+    fi
+}
+
+download_site() {
+    local url=$1
+    local auth=$2
+    local limit_rate=$3
+    local recursive=$4
+
+    local wget_command="wget -m -e robots=off --no-check-certificate"
+
+    if [ -n "$auth" ]; then
+        wget_command+=" --user=$auth --password=$auth"
+    fi
+
+    if [ -n "$limit_rate" ]; then
+        wget_command+=" --limit-rate=$limit_rate"
+    fi
+
+    if [ -n "$recursive" ]; then
+        wget_command+=" -r -l $recursive"
+    fi
+
+    $wget_command "$url"
+}
+
 main() {
+    check_requirements
+
     # Parse command line arguments
     while [[ $# -gt 0 ]]; do
         case $1 in
@@ -87,6 +122,18 @@ main() {
                 version
                 exit 0
                 ;;
+            -r|--recursive)
+                recursive_depth="$2"
+                shift 2
+                ;;
+            -l|--limit-rate)
+                limit_rate="$2"
+                shift 2
+                ;;
+            -a|--auth)
+                auth="$2"
+                shift 2
+                ;;
             *)
                 url="$1"
                 shift
@@ -104,7 +151,7 @@ main() {
     print_banner
 
     # Download the website
-    wget -m -e robots=off --no-check-certificate "$url"
+    download_site "$url" "$auth" "$limit_rate" "$recursive_depth"
 
     # Find the files with the specified file types
     if [ -n "$file_types" ]; then
