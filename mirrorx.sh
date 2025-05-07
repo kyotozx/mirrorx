@@ -1,225 +1,185 @@
 #!/bin/bash
 
-# Note: THIS IS A EXPERIMENTAL SCRIPT! DID IT JUST TO PRACTICE! Bugs or whatever are expected.
+# Mirror X - Website Cloning Utility
+# Experimental script for practice.
+# Made by @kyotozx (https://github.com/kyotozx)
+# Version: 1.1
 
-# Creds: https://github.com/kyotozx
-# My socials: https://guns.lol/kyotozx
-# Discord: kyotozx
-
-# Requirements: wget. Use <sudo apt install wget>.
-
-# Usage: ./mirrorx -h 
-# SEE THE README.MD!
+# Requirements: wget, zip
 
 command_exists() {
     command -v "$1" >/dev/null 2>&1
 }
 
 print_banner() {
-    echo "
- ███▄ ▄███▓ ██▓ ██▀███   ██▀███   ▒█████   ██▀███     ▒██   ██▒
-▓██▒▀█▀ ██▒▓██▒▓██ ▒ ██▒▓██ ▒ ██▒▒██▒  ██▒▓██ ▒ ██▒   ▒▒ █ █ ▒░
-▓██    ▓██░▒██▒▓██ ░▄█ ▒▓██ ░▄█ ▒▒██░  ██▒▓██ ░▄█ ▒   ░░  █   ░
-▒██    ▒██ ░██░▒██▀▀█▄  ▒██▀▀█▄  ▒██   ██░▒██▀▀█▄      ░ █ █ ▒ 
-▒██▒   ░██▒░██░░██▓ ▒██▒░██▓ ▒██▒░ ████▓▒░░██▓ ▒██▒   ▒██▒ ▒██▒
-░ ▒░   ░  ░░▓  ░ ▒▓ ░▒▓░░ ▒▓ ░▒▓░░ ▒░▒░▒░ ░ ▒▓ ░▒▓░   ▒▒ ░ ░▓ ░
-░  ░      ░ ▒ ░  ░▒ ░ ▒░  ░▒ ░ ▒░  ░ ▒ ▒░   ░▒ ░ ▒░   ░░   ░▒ ░
-░      ░    ▒ ░  ░░   ░   ░░   ░ ░ ░ ░ ▒    ░░   ░     ░    ░  
-       ░    ░     ░        ░         ░ ░     ░         ░    ░  Mirror X v1.0, made by @asyx6.
-                                                               
-"
-    echo "
-Mirror X is a simple script that can clone a website and return whatever the user wants.
-"
+    echo -e "\e[1;35m"
+    echo "╔════════════════════════════════════════════════════╗"
+    echo "║  ███╗░░░███╗██╗██████╗░░█████╗░██████╗░██╗░░██╗  ║"
+    echo "║  ████╗░████║██║██╔══██╗██╔══██╗██╔══██╗╚██╗██╔╝  ║"
+    echo "║  ██╔████╔██║██║██████╔╝███████║██████╔╝░╚███╔╝░  ║"
+    echo "║  ██║╚██╔╝██║██║██╔═══╝░██╔══██║██╔═══╝░░██╔██╗░  ║"
+    echo "║  ██║░╚═╝░██║██║██║░░░░░██║░░██║██║░░░░░██╔╝╚██╗  ║"
+    echo "║  ╚═╝░░░░░╚═╝╚═╝╚═╝░░░░░╚═╝░░╚═╝╚═╝░░░░░╚═╝░░╚═╝  ║"
+    echo "║                                                  ║"
+    echo "║        Mirror X - Website Clone Utility          ║"
+    echo "║        github.com/kyotozx  |  v1.1               ║"
+    echo "╚════════════════════════════════════════════════════╝"
+    echo -e "\e[0m"
+    echo "Mirror X is a simple script that clones a website and returns files that match user criteria."
 }
 
 usage() {
-    echo "
- ███▄ ▄███▓ ██▓ ██▀███   ██▀███   ▒█████   ██▀███     ▒██   ██▒
-▓██▒▀█▀ ██▒▓██▒▓██ ▒ ██▒▓██ ▒ ██▒▒██▒  ██▒▓██ ▒ ██▒   ▒▒ █ █ ▒░
-▓██    ▓██░▒██▒▓██ ░▄█ ▒▓██ ░▄█ ▒▒██░  ██▒▓██ ░▄█ ▒   ░░  █   ░
-▒██    ▒██ ░██░▒██▀▀█▄  ▒██▀▀█▄  ▒██   ██░▒██▀▀█▄      ░ █ █ ▒ 
-▒██▒   ░██▒░██░░██▓ ▒██▒░██▓ ▒██▒░ ████▓▒░░██▓ ▒██▒   ▒██▒ ▒██▒
-░ ▒░   ░  ░░▓  ░ ▒▓ ░▒▓░░ ▒▓ ░▒▓░░ ▒░▒░▒░ ░ ▒▓ ░▒▓░   ▒▒ ░ ░▓ ░
-░  ░      ░ ▒ ░  ░▒ ░ ▒░  ░▒ ░ ▒░  ░ ▒ ▒░   ░▒ ░ ▒░   ░░   ░▒ ░
-░      ░    ▒ ░  ░░   ░   ░░   ░ ░ ░ ░ ▒    ░░   ░     ░    ░  
-       ░    ░     ░        ░         ░ ░     ░         ░    ░  Mirror X v1.0, made by @kyotozx.
-                                                               
-"
-    echo "
-Mirror X is a simple script that can clone a website and return whatever the user wants."
-    echo "
-Usage: $0 <URL> [options]"
-    echo "
-Options:"
-    echo "  -h, --help | Display this help message."
-    echo "  -f, --file-types | Specify the file types to download."
-    echo "  -e, --exclude-file-type | Specify the file types to exclude from the download."
-    echo "  -s, --search-string | Specify the search string to look for in the files."
-    echo "  -v, --version | Display the version of the script."
-    echo "  -r, --recursive | Download recursively with a specified depth."
-    echo "  -l, --limit-rate | Limit the download rate (e.g., 100k)."
-    echo "  -a, --auth | Provide authentication credentials (user:password)."
+    print_banner
+    echo "Usage: $0 <URL> [options]"
+    echo ""
+    echo "Options:"
+    echo "  -h, --help              Display this help message."
+    echo "  -f, --file-types        Comma-separated file extensions to include."
+    echo "  -e, --exclude-file-types Comma-separated extensions to exclude."
+    echo "  -s, --search-string     Search string in the downloaded files."
+    echo "  -v, --version           Display script version."
+    echo "  -r, --recursive         Enable recursive download with depth."
+    echo "  -l, --limit-rate        Limit download speed (e.g. 100k)."
+    echo "  -a, --auth              Provide authentication in format user:password."
+    echo "  -o, --output-dir        Directory to save the downloaded site."
 }
 
 version() {
-    echo "Mirror X v1.0"
+    echo "Mirror X v1.1"
 }
 
 check_requirements() {
-    if ! command_exists wget; then
-        echo "Error: wget is not installed. Please install it using 'sudo apt install wget'."
-        exit 1
-    fi
+    for cmd in wget zip; do
+        if ! command_exists $cmd; then
+            echo "Error: '$cmd' is not installed. Install it with 'sudo apt install $cmd'."
+            exit 1
+        fi
+    done
 }
 
 download_site() {
-    local url=$1
-    local auth=$2
-    local limit_rate=$3
-    local recursive=$4
+    local url="$1"
+    local auth="$2"
+    local limit_rate="$3"
+    local recursive="$4"
+    local output_dir="$5"
 
-    local wget_command="wget -m -e robots=off --no-check-certificate"
+    mkdir -p "$output_dir"
+    cd "$output_dir" || exit 1
+
+    local wget_command=(wget -m -e robots=off --no-check-certificate)
 
     if [ -n "$auth" ]; then
-        wget_command+=" --user=$auth --password=$auth"
+        IFS=':' read -r auth_user auth_pass <<< "$auth"
+        wget_command+=(--user="$auth_user" --password="$auth_pass")
     fi
 
     if [ -n "$limit_rate" ]; then
-        wget_command+=" --limit-rate=$limit_rate"
+        wget_command+=(--limit-rate="$limit_rate")
     fi
 
     if [ -n "$recursive" ]; then
-        wget_command+=" -r -l $recursive"
+        wget_command+=(-r -l "$recursive")
     fi
 
-    $wget_command "$url"
+    wget_command+=("$url")
+    "${wget_command[@]}"
+    cd - > /dev/null
 }
 
 main() {
     check_requirements
 
-    # Parse command line arguments
+    local file_types=""
+    local exclude_file_types=""
+    local search_string=""
+    local recursive_depth=""
+    local limit_rate=""
+    local auth=""
+    local url=""
+    local output_dir="mirrorx_download"
+
     while [[ $# -gt 0 ]]; do
         case $1 in
             -h|--help)
-                usage
-                exit 0
-                ;;
+                usage; exit 0 ;;
             -f|--file-types)
-                file_types="$2"
-                shift 2
-                ;;
+                file_types="$2"; shift 2 ;;
             -e|--exclude-file-types)
-                exclude_file_types="$2"
-                shift 2
-                ;;
+                exclude_file_types="$2"; shift 2 ;;
             -s|--search-string)
-                search_string="$2"
-                shift 2
-                ;;
+                search_string="$2"; shift 2 ;;
             -v|--version)
-                version
-                exit 0
-                ;;
+                version; exit 0 ;;
             -r|--recursive)
-                recursive_depth="$2"
-                shift 2
-                ;;
+                recursive_depth="$2"; shift 2 ;;
             -l|--limit-rate)
-                limit_rate="$2"
-                shift 2
-                ;;
+                limit_rate="$2"; shift 2 ;;
             -a|--auth)
-                auth="$2"
-                shift 2
-                ;;
+                auth="$2"; shift 2 ;;
+            -o|--output-dir)
+                output_dir="$2"; shift 2 ;;
             *)
-                url="$1"
-                shift
-                ;;
+                url="$1"; shift ;;
         esac
     done
 
-    # Check if the URL is valid
     if [[ ! $url =~ ^https?:// ]]; then
-        echo "Error: Invalid URL! | Use -h or --help to see the usage."
+        echo "Error: Invalid URL! Use -h or --help for usage."
         exit 1
     fi
 
-    # Print the banner
     print_banner
+    download_site "$url" "$auth" "$limit_rate" "$recursive_depth" "$output_dir"
 
-    # Download the website
-    download_site "$url" "$auth" "$limit_rate" "$recursive_depth"
+    cd "$output_dir" || exit 1
 
-    # Find the files with the specified file types
+    local files=()
     if [ -n "$file_types" ]; then
-        files=$(find . -name "*.$file_types" -type f)
+        IFS=',' read -ra types <<< "$file_types"
+        for ext in "${types[@]}"; do
+            files+=( $(find . -type f -name "*.$ext") )
+        done
     else
-        files=$(find . -type f)
+        files=( $(find . -type f) )
     fi
 
-    # Exclude the files with the specified file types
     if [ -n "$exclude_file_types" ]; then
-        for exclude_file_type in $exclude_file_types; do
-            files=$(echo "$files" | grep -v ".$exclude_file_type$")
+        IFS=',' read -ra ex_types <<< "$exclude_file_types"
+        for ext in "${ex_types[@]}"; do
+            files=( $(printf "%s\n" "${files[@]}" | grep -v ".$ext$") )
         done
     fi
 
-    # Get the directory where the script is located
-    script_dir=$(dirname "$0")
-
-    # Find all the files that were downloaded by the script
-    downloaded_files=$(find "$script_dir" -type f -newer "$script_dir/$0")
-
-    # Search for the specified string in the downloaded files
     if [ -n "$search_string" ]; then
-      files=$(grep -ril "$search_string" $downloaded_files)
-    else
-      files=$downloaded_files
+        files=( $(grep -ril "$search_string" .) )
     fi
 
-    # Print the files
-    if [ -z "$files" ]; then
+    if [ ${#files[@]} -eq 0 ]; then
         echo "No files found."
     else
         echo "Files found:"
-        for file in $files; do
-            echo "$file"
+        for f in "${files[@]}"; do
+            echo "$f"
         done
     fi
 
-    # Ask the user if they want to delete the downloaded files
     while true; do
         read -p "Do you want to delete the downloaded files (y/n)? " remove_files
-        if [ "$remove_files" == "y" ]; then
-
-            filename=$(basename "$url")
-
-            if [[ -w "$filename" ]]; then
-                rm -rf "$filename"
-                echo "File $filename deleted."
-            else
-                echo "You do not have permission to delete the file $filename."
-            fi
-            break
-        elif [ "$remove_files" == "n" ]; then
-            # Ask the user if they want to create a compressed archive of the downloaded files
-            read -p "Do you want to create a compressed archive of the downloaded files (y/n)? " create_archive
-            if [ "$create_archive" == "y" ]; then
-
-                filename=$(basename "$url")
-
-                zip -r "$filename.zip" "$filename"
-                echo "Archive $filename.zip created."
-                break
-            else
-                break
-            fi
-        else
-            echo "Invalid input. Please enter y or n."
-        fi
+        case "$remove_files" in
+            y|Y)
+                rm -rf "$output_dir"
+                echo "Directory '$output_dir' deleted."
+                break ;;
+            n|N)
+                read -p "Do you want to create a compressed archive of the files (y/n)? " create_archive
+                if [[ "$create_archive" == "y" || "$create_archive" == "Y" ]]; then
+                    zip -r "$output_dir.zip" "$output_dir"
+                    echo "Archive '$output_dir.zip' created."
+                fi
+                break ;;
+            *) echo "Please answer y or n." ;;
+        esac
     done
 }
 
