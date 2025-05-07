@@ -12,39 +12,41 @@ command_exists() {
 }
 
 print_banner() {
-    echo -e "\e[1;35m"
-    echo "╔════════════════════════════════════════════════════╗"
-    echo "║  ███╗░░░███╗██╗██████╗░░█████╗░██████╗░██╗░░██╗  ║"
-    echo "║  ████╗░████║██║██╔══██╗██╔══██╗██╔══██╗╚██╗██╔╝  ║"
-    echo "║  ██╔████╔██║██║██████╔╝███████║██████╔╝░╚███╔╝░  ║"
-    echo "║  ██║╚██╔╝██║██║██╔═══╝░██╔══██║██╔═══╝░░██╔██╗░  ║"
-    echo "║  ██║░╚═╝░██║██║██║░░░░░██║░░██║██║░░░░░██╔╝╚██╗  ║"
-    echo "║  ╚═╝░░░░░╚═╝╚═╝╚═╝░░░░░╚═╝░░╚═╝╚═╝░░░░░╚═╝░░╚═╝  ║"
-    echo "║                                                  ║"
-    echo "║        Mirror X - Website Clone Utility          ║"
-    echo "║        github.com/kyotozx  |  v1.1               ║"
-    echo "╚════════════════════════════════════════════════════╝"
+    echo -e "\e[1;36m"
+    echo "╔════════════════════════════════════════════╗"
+    echo "║ • ▌ ▄ ·. ▪  ▄▄▄  ▄▄▄        ▄▄▄  ▐▄• ▄     ║"
+    echo "║ ·██ ▐███▪██ ▀▄ █·▀▄ █·▪     ▀▄ █· █▌█▌▪    ║"
+    echo "║ ▐█ ▌▐▌▐█·▐█·▐▀▀▄ ▐▀▀▄  ▄█▀▄ ▐▀▀▄  ·██·     ║"
+    echo "║ ██ ██▌▐█▌▐█▌▐█•█▌▐█•█▌▐█▌.▐▌▐█•█▌▪▐█·█▌    ║"
+    echo "║ ▀▀  █▪▀▀▀▀▀▀.▀  ▀.▀  ▀ ▀█▄▀▪.▀  ▀•▀▀ ▀▀    ║"
+    echo "║                                            ║"
+    echo "║     Mirror X - Website Clone Utility       ║"
+    echo "║     github.com/kyotozx     |    v1.0       ║"
+    echo "╚════════════════════════════════════════════╝"
     echo -e "\e[0m"
-    echo "Mirror X is a simple script that clones a website and returns files that match user criteria."
+    echo "Mirror X is a simple script that clones a website and returns files that match user criteria"
 }
 
 usage() {
     print_banner
-    echo "Usage: $0 <URL> [options]"
+    echo -e "\e[1;35m╔═════════════════════════════════════════════════════════════════╗\e[0m"
+    echo -e "\e[1;35m║                         Usage: $0 <URL> [options]                   ║\e[0m"
+    echo -e "\e[1;35m╚═════════════════════════════════════════════════════════════════╝\e[0m"
     echo ""
     echo "Options:"
-    echo "  -h, --help              Display this help message."
-    echo "  -f, --file-types        Comma-separated file extensions to include."
-    echo "  -e, --exclude-file-types Comma-separated extensions to exclude."
-    echo "  -s, --search-string     Search string in the downloaded files."
-    echo "  -v, --version           Display script version."
-    echo "  -r, --recursive         Enable recursive download with depth."
-    echo "  -l, --limit-rate        Limit download speed (e.g. 100k)."
-    echo "  -a, --auth              Provide authentication in format user:password."
-    echo "  -o, --output-dir        Directory to save the downloaded site."
+    echo "  -h, --help                Display this help message."
+    echo "  -f, --file-types          Comma-separated file extensions to include."
+    echo "  -e, --exclude-file-types  Comma-separated extensions to exclude."
+    echo "  -s, --search-string       Search string in the downloaded files."
+    echo "  -v, --version             Display script version."
+    echo "  -r, --recursive           Enable recursive download with depth."
+    echo "  -l, --limit-rate          Limit download speed (e.g., 100k)."
+    echo "  -a, --auth                Provide authentication in format user:password."
+    echo "  -o, --output-dir          Directory to save the downloaded site."
 }
 
 version() {
+    print_banner
     echo "Mirror X v1.1"
 }
 
